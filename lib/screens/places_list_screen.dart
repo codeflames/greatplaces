@@ -33,25 +33,28 @@ class PlacesListScreen extends StatelessWidget {
               : Consumer<GreatPlaces>(
                   child: Center(
                       child: const Text('No Places yet...please add a place')),
-                  builder: (ctx, greatPlaces, ch) =>
-                      greatPlaces.items.length <= 0
-                          ? ch
-                          : ListView.builder(
-                              itemCount: greatPlaces.items.length,
-                              itemBuilder: (ctx, index) => ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage:
-                                      FileImage(greatPlaces.items[index].image),
-                                ),
-                                title: Text(greatPlaces.items[index].title),
-                                onTap: () {
-                                  //TODO
-                                  Navigator.of(context).pushNamed(
-                                      PlaceDetail.routeName,
-                                      arguments: greatPlaces.items[index].id);
-                                },
-                              ),
-                            )),
+                  builder: (ctx, greatPlaces, ch) => greatPlaces.items.length <=
+                          0
+                      ? ch
+                      : ListView.builder(
+                          itemCount: greatPlaces.items.length,
+                          itemBuilder: (ctx, index) => ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  FileImage(greatPlaces.items[index].image),
+                            ),
+                            title: Text(greatPlaces.items[index].title),
+                            onTap: () {
+                              //TODO
+                              Navigator.of(context)
+                                  .pushNamed(PlaceDetail.routeName, arguments: {
+                                'id': greatPlaces.items[index].id,
+                                'image': greatPlaces.items[index].image,
+                                'title': greatPlaces.items[index].title,
+                              });
+                            },
+                          ),
+                        )),
         ));
   }
 }
